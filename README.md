@@ -130,3 +130,18 @@ kvm-env build-image
 web-server           running      4      4096         Production web server
 database             stopped      8      8192         PostgreSQL server
 ================================================================================
+
+
+kvm-env/
+├── setup.py                 # Установка пакета
+├── requirements.txt         # Python-зависимости
+├── .env.example            # Шаблон конфигурации БД
+├── README.md               # Документация
+│
+└── kvm_env/
+    ├── __init__.py
+    ├── cli.py              # Точка входа, обработка команд CLI
+    ├── dependency_manager.py   # Автоустановка зависимостей (apt, systemctl)
+    ├── config_manager.py   # Работа с PostgreSQL (CRUD, логирование)
+    ├── vm_manager.py       # Управление ВМ через libvirt
+    └── image_builder.py    # Сборка образов через Packer
