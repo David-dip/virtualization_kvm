@@ -95,3 +95,38 @@ EOF
 wget https://releases.hashicorp.com/packer/1.11.2/packer_1.11.2_linux_amd64.zip
 unzip packer_1.11.2_linux_amd64.zip
 sudo mv packer /usr/local/bin/
+
+
+
+---
+# Базовые команды
+# Создание виртуальной машины
+kvm-env create web-server --vcpus 2 --memory 2048 --description "Production web server"
+
+# Просмотр списка ВМ
+kvm-env list
+
+# Редактирование параметров
+kvm-env edit web-server --vcpus 4 --memory 4096
+
+# Клонирование ВМ
+kvm-env clone web-server web-server-backup
+
+# Удаление ВМ (с диском)
+kvm-env remove web-server-backup --remove-disk --force
+
+# Ansible провижининг
+kvm-env provision web-server --playbook setup.yml --user root
+
+# Сборка базового образа через Packer
+kvm-env build-image
+
+---
+
+## Пример вывода kvm-env list
+================================================================================
+Имя                  Состояние    vCPU   Память(MB)   Описание
+--------------------------------------------------------------------------------
+web-server           running      4      4096         Production web server
+database             stopped      8      8192         PostgreSQL server
+================================================================================
